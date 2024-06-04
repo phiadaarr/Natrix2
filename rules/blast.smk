@@ -13,8 +13,8 @@ if config["blast"]["database"] == "SILVA":
         shell:
             """
                 dir_name=$(dirname {params[0]});
-                wget -P $dir_name/ --progress=bar ftp://ftp.arb-silva.de/current/Exports/SILVA_*_SSURef_tax_silva.fasta.gz;
-                gunzip -c $dir_name/SILVA_*_SSURef_tax_silva.fasta.gz > $dir_name/silva.db.fasta;
+                wget -P $dir_name/ --progress=bar https://ftp.arb-silva.de/current/Exports/SILVA_138.1_SSURef_tax_silva.fasta.gz;
+                pigz -dc $dir_name/SILVA_138.1_SSURef_tax_silva.fasta.gz > $dir_name/silva.db.fasta;
                 makeblastdb -in $dir_name/silva.db.fasta -dbtype nucl -parse_seqids -out $dir_name/silva.db -blastdb_version 5
             """
 
@@ -98,7 +98,7 @@ rule blast:
         " -perc_identity {params.ident} -evalue {params.evalue}"
         " -outfmt {params.out6} -out {output}"
 
-if  config['blast']['blast']:
+if config['blast']['blast']:
 	if config["blast"]["database"] == "NCBI":
 
 		rule ncbi_taxonomy:

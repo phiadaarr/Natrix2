@@ -36,11 +36,14 @@ rule all:
         # blast
         expand(os.path.join(config["general"]["output_dir"],"finalData/blast_{database}/OTU_table.csv"), database=config['blast']['database'].lower()) if config["blast"]["blast"]  else [],
         expand(os.path.join(config["general"]["output_dir"],"finalData/blast_{database}/OTU_table_mumu.csv"), database=config['blast']['database'].lower()) if config["general"]["seq_rep"] == "OTU" and  config["blast"]["blast"] and config['postcluster']['mumu'] else [],
-        # nanopore
-
+        
+# nanopore
 if not config['dataset']['nanopore']:
     ruleorder: assembly > prinseq
 
+# Error message: If you have set [seq_rep: ASV] you cannot use [clustering: vsearch]
+if config['general']['seq_rep']=='ASV' and config['clustering']== 'vsearch':
+    print("\nCONFIG_ERROR: SETTING NOT POSSIBLE!\nPlease use [clustering: swarm] when you set [seq_rep: ASV]\nError: [seq_rep: ASV] in conjunction with [clustering: vsearch]\n")
 
 include: "rules/demultiplexing.smk"
 include: "rules/quality_control.smk"

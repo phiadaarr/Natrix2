@@ -93,14 +93,14 @@ if config['dataset']['nanopore']:
                 "../scripts/counts_consensus_repeat.py"
                 
     else:
-        ## gunzip fastq
-        rule gunzip:
+        ## pigz fastq
+        rule pigz:
             input:
                 os.path.join(config["general"]["filename"],"{sample}_{unit}_{read}.fastq.gz")
             output:
                 temp(os.path.join(config["general"]["output_dir"],"fastq/{sample}_{unit}_{read}.tmp"))
             shell:
-                "gunzip -c {input} > {output}"
+                "pigz -dc {input} > {output}"
         
         ## check format        
         rule check_file_format:
