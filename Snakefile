@@ -41,9 +41,9 @@ rule all:
 if not config['dataset']['nanopore']:
     ruleorder: assembly > prinseq
 
-# Error message: If you have set [seq_rep: ASV] you cannot use [clustering: vsearch]
-if config['general']['seq_rep']=='ASV' and config['clustering']== 'vsearch':
-    print("\nCONFIG_ERROR: SETTING NOT POSSIBLE!\nPlease use [clustering: swarm] when you set [seq_rep: ASV]\nError: [seq_rep: ASV] in conjunction with [clustering: vsearch]\n")
+# Error message: Invalid Configuration: [seq_rep: ASV] cannot be combined with [clustering: vsearch]. Use [clustering: swarm] with [seq_rep: ASV] instead.
+if config['general']['seq_rep'] == 'ASV' and config['clustering'] == 'vsearch':
+    raise ValueError("Invalid Configuration: [seq_rep: ASV] cannot be combined with [clustering: vsearch]. Use [clustering: swarm] with [seq_rep: ASV] instead.")
 
 include: "rules/demultiplexing.smk"
 include: "rules/quality_control.smk"

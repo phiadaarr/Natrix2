@@ -89,3 +89,4 @@ pychop:
 
 # vsearch clustering
 clustering: "vsearch" # nanopore only support vsearch option
+vsearch_id: 0.97 # Identity threshold for VSEARCH clustering
