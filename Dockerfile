@@ -35,6 +35,16 @@ RUN env_loc=$(conda info --base)/etc/profile.d/conda.sh && source $env_loc && co
 RUN env_loc=$(conda info --base)/etc/profile.d/conda.sh && source $env_loc && conda activate natrix \
     && snakemake --configfile docker_dummyfiles/docker_dummy_env2.yaml --cores 1 --use-conda --conda-create-envs-only
 
+COPY Nanopore.yaml /build
+COPY Nanopore.csv /build
+COPY Nanopore_data /build/Nanopore_data
+
+RUN env_loc=$(conda info --base)/etc/profile.d/conda.sh && source $env_loc && conda activate natrix \
+    && python create_dataframe.py Nanopore.yaml
+
+RUN env_loc=$(conda info --base)/etc/profile.d/conda.sh && source $env_loc && conda activate natrix \
+    && snakemake --configfile Nanopore.yaml --cores 1 --use-conda --conda-create-envs-only
+
 RUN rm -rf /build
 
 COPY . /app
