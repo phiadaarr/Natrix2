@@ -1,16 +1,41 @@
 FROM continuumio/miniconda3
 SHELL ["/bin/bash", "-c"]
 
-COPY . /app
-WORKDIR /app
-RUN apt update && apt-get install -y libltdl7 && apt upgrade -y && apt-get purge -y && apt-get clean
+WORKDIR /build
+RUN apt update && apt-get install -y libltdl7 screen && apt upgrade -y && apt-get purge -y && apt-get clean
 
-# Create the environment:
-RUN conda env create -f natrix.yaml
-RUN chmod +x docker_pipeline.sh
 # Make RUN commands use the new environment:
 #SHELL ["conda", "run", "-n", "myenv", "/bin/bash", "-c"]
 
-# Creating envs for each task:
-RUN env_loc=$(conda info --base)/etc/profile.d/conda.sh && source $env_loc && conda activate natrix && mkdir docker_dummy_env1 && touch docker_dummy_env1.csv && cp docker_dummyfiles/units.tsv docker_dummy.tsv && mkdir docker_dummy_env2 && touch docker_dummy_env2.csv && python create_dataframe.py docker_dummyfiles/docker_dummy_env1.yaml && snakemake --configfile docker_dummyfiles/docker_dummy_env1.yaml --cores 1 --use-conda --conda-create-envs-only && python create_dataframe.py docker_dummyfiles/docker_dummy_env1.yaml && snakemake --configfile docker_dummyfiles/docker_dummy_env2.yaml --cores 1 --use-conda --conda-create-envs-only && rm -rf docker_dummy_env1 && rm docker_dummy_env1.csv && rm -rf docker_dummy_env2 && rm docker_dummy_env2.csv && rm docker_dummy.tsv rm -rf Illumina_results_swarm
-CMD ["sh","-c", "./docker_pipeline.sh $PROJECT_NAME"]
+COPY docker_pipeline.sh /app/docker_pipeline.sh
+COPY natrix.yaml /build
+COPY docker_dummyfiles/units.tsv /build/docker_dummy.tsv
+COPY create_dataframe.py /build
+COPY docker_dummyfiles/ /build/docker_dummyfiles
+COPY Snakefile /build/
+COPY schema /build/schema
+COPY rules /build/rules
+COPY envs /build/envs
+RUN mkdir docker_dummy_env1
+RUN mkdir docker_dummy_env2
+RUN touch docker_dummy_env1.csv
+RUN touch docker_dummy_env2.csv
+
+RUN conda env create -f natrix.yaml
+
+RUN env_loc=$(conda info --base)/etc/profile.d/conda.sh && source $env_loc && conda activate natrix \
+    && python create_dataframe.py docker_dummyfiles/docker_dummy_env1.yaml
+
+RUN env_loc=$(conda info --base)/etc/profile.d/conda.sh && source $env_loc && conda activate natrix \
+    && snakemake --configfile docker_dummyfiles/docker_dummy_env1.yaml --cores 1 --use-conda --conda-create-envs-only
+
+RUN env_loc=$(conda info --base)/etc/profile.d/conda.sh && source $env_loc && conda activate natrix \
+    && python create_dataframe.py docker_dummyfiles/docker_dummy_env2.yaml
+
+RUN env_loc=$(conda info --base)/etc/profile.d/conda.sh && source $env_loc && conda activate natrix \
+    && snakemake --configfile docker_dummyfiles/docker_dummy_env2.yaml --cores 1 --use-conda --conda-create-envs-only
+
+RUN rm -rf /build
+
+COPY . /app
+WORKDIR /app

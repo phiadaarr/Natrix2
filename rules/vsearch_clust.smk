@@ -10,7 +10,7 @@ rule vsearch_clust:
 		os.path.join(config["general"]["output_dir"],"clustering/vsearch_uc.txt")
 	threads: config["general"]["cores"]
 	params:
-	    id=config["vsearch_id"]
+	    id=0.97
 	conda:
 		"../envs/vsearch.yaml"
 	shell:
