@@ -85,3 +85,4 @@ pychop:
         qual: 7 #Minimum mean base quality (default 7)
 
 clustering: "swarm" # clustering method "vsearch" or "swarm"
+vsearch_id: 0.97
