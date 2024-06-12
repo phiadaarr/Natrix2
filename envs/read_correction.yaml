@@ -1,6 +1,8 @@
 name: read_correction
 channels:
   - bioconda
+  - defaults
+  - conda-forge
 dependencies:
   - cd-hit=4.8.1
   - fastx_toolkit
