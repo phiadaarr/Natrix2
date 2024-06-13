@@ -22,7 +22,7 @@ if config['dataset']['nanopore']:
             expand(os.path.join(config["general"]["output_dir"],"fasta/{{sample}}_{{unit}}_R{read}.fasta"),read=reads)
         output:
             expand(os.path.join(config["general"]["output_dir"],"read_correction/cd_hit/{{sample}}_{{unit}}_R{read}_rep.fasta"),read=reads)
-        threads: config["general"]["cores"]
+        threads: 2
         params:
             memory=config["general"]["memory"],
             length=config["nanopore"]["min_length"]
@@ -37,7 +37,7 @@ if config['dataset']['nanopore']:
             expand(os.path.join(config["general"]["output_dir"],"fasta/{{sample}}_{{unit}}_R{read}.fasta"), read=reads)
         output:
             expand(os.path.join(config["general"]["output_dir"],"read_correction/minimap/{{sample}}_{{unit}}_R{read}_align_1.sam"),read=reads)
-        threads: config["general"]["cores"]
+        threads: 2
         conda:
             "../envs/read_correction.yaml"
         shell:
@@ -52,7 +52,7 @@ if config['dataset']['nanopore']:
         output:
             tmp = temp(expand(os.path.join(config["general"]["output_dir"],"read_correction/racon/{{sample}}_{{unit}}_R{read}_racon_1.tmp"),read=reads)),
             final = expand(os.path.join(config["general"]["output_dir"],"read_correction/racon/{{sample}}_{{unit}}_R{read}_racon_1.fasta"),read=reads)
-        threads: config["general"]["cores"]
+        threads: 2
         conda:
             "../envs/read_correction.yaml"
         shell:
@@ -68,7 +68,7 @@ if config['dataset']['nanopore']:
             expand(os.path.join(config["general"]["output_dir"],"fasta/{{sample}}_{{unit}}_R{read}.fasta"), read=reads)
         output:
             expand(os.path.join(config["general"]["output_dir"],"read_correction/minimap/{{sample}}_{{unit}}_R{read}_align_2.sam"),read=reads)
-        threads: config["general"]["cores"]
+        threads: 2
         conda:
             "../envs/read_correction.yaml"
         shell:
@@ -83,7 +83,7 @@ if config['dataset']['nanopore']:
         output:
             tmp = temp(expand(os.path.join(config["general"]["output_dir"],"read_correction/racon/{{sample}}_{{unit}}_R{read}_racon_2.tmp"),read=reads)),
             final = expand(os.path.join(config["general"]["output_dir"],"read_correction/racon/{{sample}}_{{unit}}_R{read}_racon_2.fasta"),read=reads)
-        threads: config["general"]["cores"]
+        threads: 2
         conda:
             "../envs/read_correction.yaml"
         shell:
@@ -99,7 +99,7 @@ if config['dataset']['nanopore']:
             expand(os.path.join(config["general"]["output_dir"],"fasta/{{sample}}_{{unit}}_R{read}.fasta"), read=reads)
         output:
             expand(os.path.join(config["general"]["output_dir"],"read_correction/minimap/{{sample}}_{{unit}}_R{read}_align_3.sam"),read=reads)
-        threads: config["general"]["cores"]
+        threads: 2
         conda:
             "../envs/read_correction.yaml"
         shell:
@@ -114,7 +114,7 @@ if config['dataset']['nanopore']:
         output:
             tmp = temp(expand(os.path.join(config["general"]["output_dir"],"read_correction/racon/{{sample}}_{{unit}}_R{read}_racon_3.tmp"),read=reads)),
             final = expand(os.path.join(config["general"]["output_dir"],"read_correction/racon/{{sample}}_{{unit}}_R{read}_racon_3.fasta"),read=reads)
-        threads: config["general"]["cores"]
+        threads: 2
         conda:
             "../envs/read_correction.yaml"
         shell:
@@ -130,7 +130,7 @@ if config['dataset']['nanopore']:
             expand(os.path.join(config["general"]["output_dir"],"fasta/{{sample}}_{{unit}}_R{read}.fasta"), read=reads)
         output:
             expand(os.path.join(config["general"]["output_dir"],"read_correction/minimap/{{sample}}_{{unit}}_R{read}_align_4.sam"),read=reads)
-        threads: config["general"]["cores"]
+        threads: 2
         conda:
             "../envs/read_correction.yaml"
         shell:
@@ -145,7 +145,7 @@ if config['dataset']['nanopore']:
         output:
             tmp = temp(expand(os.path.join(config["general"]["output_dir"],"read_correction/racon/{{sample}}_{{unit}}_R{read}_racon_4.tmp"),read=reads)),
             final = expand(os.path.join(config["general"]["output_dir"],"read_correction/racon/{{sample}}_{{unit}}_R{read}_racon_4.fasta"),read=reads)
-        threads: config["general"]["cores"]
+        threads: 2
         conda:
             "../envs/read_correction.yaml"
         shell:
@@ -161,7 +161,7 @@ if config['dataset']['nanopore']:
             expand(os.path.join(config["general"]["output_dir"],"fasta/{{sample}}_{{unit}}_R{read}.fasta"), read=reads)
         output:
             expand(os.path.join(config["general"]["output_dir"],"read_correction/minimap/{{sample}}_{{unit}}_R{read}_align_5.sam"),read=reads)
-        threads: config["general"]["cores"]
+        threads: 2
         conda:
             "../envs/read_correction.yaml"
         shell:
@@ -176,7 +176,7 @@ if config['dataset']['nanopore']:
         output:
             tmp = temp(expand(os.path.join(config["general"]["output_dir"],"read_correction/racon/{{sample}}_{{unit}}_R{read}_racon_5.tmp"),read=reads)),
             final = expand(os.path.join(config["general"]["output_dir"],"read_correction/racon/{{sample}}_{{unit}}_R{read}_racon_5.fasta"),read=reads)
-        threads: config["general"]["cores"]
+        threads: 2
         conda:
             "../envs/read_correction.yaml"
         shell:
@@ -194,7 +194,7 @@ if config['dataset']['nanopore']:
             out_dir=expand(os.path.join(config["general"]["output_dir"], "read_correction/medaka/{{sample}}_{{unit}}_R{read}/temp"), read=reads)
         output:
             temp(expand(os.path.join(config["general"]["output_dir"],"read_correction/medaka/{{sample}}_{{unit}}_R{read}/temp/consensus.fasta"), read=reads))
-        threads: config["general"]["cores"]
+        threads: 2
         conda: "../envs/medaka.yaml"
         shell:
             """
@@ -220,7 +220,7 @@ if config['dataset']['nanopore']:
             expand(os.path.join(config["general"]["output_dir"],"fasta/{{sample}}_{{unit}}_R{read}.fasta"), read=reads)
         output:
             expand(os.path.join(config["general"]["output_dir"],"read_correction/counts_mapping/{{sample}}_{{unit}}_R{read}_align.sam"),read=reads)
-        threads: config["general"]["cores"]
+        threads: 2
         conda:
             "../envs/read_correction.yaml"
         shell:

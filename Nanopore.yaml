@@ -4,7 +4,7 @@ general:
         output_dir: Nanopore_results # Path to custom output directory / relative to the root directory of natrix. Do not use a dash in the folder name.
         primertable: Nanopore.csv # Path to the primertable. If the primertable is not in the root directory of Natrix, please add the path relative to the root directory (e.g. input/example_data.yaml)
         units: units.tsv # Path to the sequencing unit sheet. (name will be concatenated with output_dir)
-        cores: 20 # Amount of cores available for the workflow.
+        cores: 10 # Amount of cores available for the workflow.
         memory: 10000 # Available RAM in Mb.
         multiqc: TRUE # Initial quality check (fastqc & multiqc), currently only works for not yet assembled reads.
         demultiplexing: FALSE # Boolean, run demultiplexing for reads if they were not demultiplexed by the sequencing company (only Illumina support & slow).
