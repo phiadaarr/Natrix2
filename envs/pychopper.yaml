@@ -1,9 +1,8 @@
 name: pychopper
 channels:
-  - epi2melabs
+  - nanoporetech
   - bioconda
   - conda-forge
   - defaults
 dependencies:
-  - "epi2melabs::pychopper"
-  - pandas=1.5.1
+  - "nanoporetech::pychopper"

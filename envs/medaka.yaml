@@ -1,8 +1,7 @@
 name: medaka
 channels:
+  - nanoporetech
   - conda-forge
   - defaults
-  - bioconda
 dependencies:
-  - medaka=1.1.2
-  - numpy=1.19
+  - medaka=1.12
