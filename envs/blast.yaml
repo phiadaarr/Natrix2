@@ -1,8 +1,8 @@
 name: blast
 channels:
-  - defaults
-  - bioconda
   - conda-forge
+  - bioconda
+  - defaults
   - r
 dependencies:
   - dinopy=3.0.0

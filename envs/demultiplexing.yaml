@@ -1,5 +1,6 @@
 name: demultiplexing
 channels:
+  - conda-forge
   - bioconda
   - defaults
 dependencies:

@@ -1,8 +1,8 @@
 name: quality_control
 channels:
-  - defaults
-  - bioconda
   - conda-forge
+  - bioconda
+  - defaults
 
 dependencies:
   - fastqc=0.12.1
