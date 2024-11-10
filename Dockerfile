@@ -14,6 +14,7 @@ COPY rules/ /app/rules
 COPY envs/ /app/envs
 COPY natrix.yaml /app
 COPY docker_pipeline.sh /app/docker_pipeline.sh
+RUN chmod +x /app/docker_pipeline.sh
 
 COPY create_dataframe.py /app
 COPY docker_dummyfiles/ /app/docker_dummyfiles
@@ -39,5 +40,6 @@ RUN env_loc=$(conda info --base)/etc/profile.d/conda.sh && source $env_loc && co
     python create_dataframe.py docker_dummyfiles/docker_dummy_nanopore.yaml && \
     && snakemake --configfile docker_dummyfiles/docker_dummy_nanopore.yaml --cores 1 --use-conda --conda-create-envs-only && \
     rm -rf docker_dummy_nanopore && rm docker_dummy_nanopore.csv && rm docker_dummy.tsv
-    
+
+
 CMD ["sh","-c", "./docker_pipeline.sh $PROJECT_NAME"]
