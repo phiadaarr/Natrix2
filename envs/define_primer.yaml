@@ -4,4 +4,4 @@ channels:
   - conda-forge
   - defaults
 dependencies:
-  - pandas=1.2.3
+  - pandas=2.0.3

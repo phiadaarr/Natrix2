@@ -5,7 +5,7 @@ channels:
   - defaults
 dependencies:
   - dinopy=3.0.0
-  - pandas
+  - pandas=2.0.3
   - pandaseq=2.11
   - libgcc
   - libtool

@@ -5,4 +5,4 @@ channels:
   - defaults
 dependencies:
   - dinopy=3.0.0
-  - pandas=2.1.4
+  - pandas=2.0.3

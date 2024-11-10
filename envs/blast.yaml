@@ -7,7 +7,7 @@ channels:
 dependencies:
   - dinopy=3.0.0
   - blast=2.15.0
-  - pandas=2.1.4
+  - pandas=2.0.3
   - pytables
   - pigz=2.8
 
