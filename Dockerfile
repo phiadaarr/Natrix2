@@ -23,22 +23,22 @@ COPY primer_table/ /app/primer_table
 
 RUN conda env create -f natrix.yaml
 
-RUN env_loc=$(conda info --base)/etc/profile.d/conda.sh && source $env_loc && conda activate natrix \
-    && mkdir docker_dummy_env1 && touch docker_dummy_env1.csv && cp docker_dummyfiles/units.tsv docker_dummy.tsv && \
+RUN env_loc=$(conda info --base)/etc/profile.d/conda.sh && source $env_loc && conda activate natrix && \
+    mkdir docker_dummy_env1 && touch docker_dummy_env1.csv && cp docker_dummyfiles/units.tsv docker_dummy.tsv && \
     python create_dataframe.py docker_dummyfiles/docker_dummy_env1.yaml && \
-    && snakemake --configfile docker_dummyfiles/docker_dummy_env1.yaml --cores 1 --use-conda --conda-create-envs-only && \
+    snakemake --configfile docker_dummyfiles/docker_dummy_env1.yaml --cores 1 --use-conda --conda-create-envs-only && \
     rm -rf docker_dummy_env1 && rm docker_dummy_env1.csv && rm docker_dummy.tsv
 
-RUN env_loc=$(conda info --base)/etc/profile.d/conda.sh && source $env_loc && conda activate natrix \
-    && mkdir docker_dummy_env2 && touch docker_dummy_env2.csv && cp docker_dummyfiles/units.tsv docker_dummy.tsv && \
+RUN env_loc=$(conda info --base)/etc/profile.d/conda.sh && source $env_loc && conda activate natrix && \
+    mkdir docker_dummy_env2 && touch docker_dummy_env2.csv && cp docker_dummyfiles/units.tsv docker_dummy.tsv && \
     python create_dataframe.py docker_dummyfiles/docker_dummy_env2.yaml && \
-    && snakemake --configfile docker_dummyfiles/docker_dummy_env2.yaml --cores 1 --use-conda --conda-create-envs-only && \
+    snakemake --configfile docker_dummyfiles/docker_dummy_env2.yaml --cores 1 --use-conda --conda-create-envs-only && \
     rm -rf docker_dummy_env2 && rm docker_dummy_env2.csv && rm docker_dummy.tsv
     
-RUN env_loc=$(conda info --base)/etc/profile.d/conda.sh && source $env_loc && conda activate natrix \
-    && mkdir docker_dummy_nanopore && touch docker_dummy_nanopore.csv && cp docker_dummyfiles/units.tsv docker_dummy.tsv && \
+RUN env_loc=$(conda info --base)/etc/profile.d/conda.sh && source $env_loc && conda activate natrix && \
+    mkdir docker_dummy_nanopore && touch docker_dummy_nanopore.csv && cp docker_dummyfiles/units.tsv docker_dummy.tsv && \
     python create_dataframe.py docker_dummyfiles/docker_dummy_nanopore.yaml && \
-    && snakemake --configfile docker_dummyfiles/docker_dummy_nanopore.yaml --cores 1 --use-conda --conda-create-envs-only && \
+    snakemake --configfile docker_dummyfiles/docker_dummy_nanopore.yaml --cores 1 --use-conda --conda-create-envs-only && \
     rm -rf docker_dummy_nanopore && rm docker_dummy_nanopore.csv && rm docker_dummy.tsv
 
 
