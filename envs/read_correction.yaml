@@ -1,7 +1,7 @@
 name: read_correction
 channels:
-  - bioconda
   - defaults
+  - bioconda
   - conda-forge
 dependencies:
   - cd-hit=4.8.1

@@ -1,4 +1,6 @@
+# Sets base image to Miniconda3
 FROM continuumio/miniconda3
+# Changes default shell to Bash
 SHELL ["/bin/bash", "-c"]
 
 WORKDIR /build

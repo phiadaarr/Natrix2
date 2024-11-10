@@ -15,7 +15,7 @@ if not config['dataset']['nanopore'] and config['classify']['mothur']:
                 method=config['classify']["method"],
                 threads=config['general']['cores'],
                 output=config['general']['output_dir'],
-                input=os.path.join(config["general"]["output_dir"],"clustering") if config["general"]["seq_rep"] == "OTU" else os.path.join(config["general"]["output_dir"],"filtering"),
+                input=os.path.join(config["general"]["output_dir"],"clustering") if config["general"]["seq_rep"] == "OTU" or config["general"]["seq_rep"] == "ASV" else os.path.join(config["general"]["output_dir"],"filtering"),
             conda:
                 "../envs/mothur.yaml"
             log:
@@ -32,7 +32,7 @@ if not config['dataset']['nanopore'] and config['classify']['mothur']:
         rule mothur_classify:
             input:
                 os.path.join(config["general"]["output_dir"],"clustering/representatives_mod.fasta") if config["general"]["seq_rep"] == "OTU" and config['clustering'] == "swarm" else ( os.path.join(config["general"]["output_dir"],"clustering/vsearch_mod.fasta") if config['clustering']== "vsearch" else os.path.join(config["general"]["output_dir"],"filtering/filtered.fasta")),
-                "database/unite_v8.3.fasta"
+                "database/unite_v10.fasta"
             output:
                 os.path.join(config["general"]["output_dir"],"mothur/unite/mothur_out.summary"),
                 os.path.join(config["general"]["output_dir"],"mothur/unite/mothur_out.taxonomy")
@@ -43,7 +43,7 @@ if not config['dataset']['nanopore'] and config['classify']['mothur']:
                 method=config['classify']["method"],
                 output=config['general']['output_dir'],
                 threads=config['general']['cores'],
-                input=os.path.join(config["general"]["output_dir"],"clustering") if config["general"]["seq_rep"] == "OTU" else os.path.join(config["general"]["output_dir"],"filtering"),
+                input=os.path.join(config["general"]["output_dir"],"clustering") if config["general"]["seq_rep"] == "OTU"   or config["general"]["seq_rep"] == "ASV" else os.path.join(config["general"]["output_dir"],"filtering"),
             conda:
                 "../envs/mothur.yaml"
             log:
@@ -71,7 +71,7 @@ if not config['dataset']['nanopore'] and config['classify']['mothur']:
                 method=config['classify']["method"],
                 output=config['general']['output_dir'],
                 threads=config['general']['cores'],
-                input=os.path.join(config["general"]["output_dir"],"clustering") if config["general"]["seq_rep"] == "OTU" else os.path.join(config["general"]["output_dir"],"filtering"),
+                input=os.path.join(config["general"]["output_dir"],"clustering") if config["general"]["seq_rep"] == "OTU"  or config["general"]["seq_rep"] == "ASV" else os.path.join(config["general"]["output_dir"],"filtering"),
             conda:
                 "../envs/mothur.yaml"
             log:
@@ -133,7 +133,7 @@ elif config['dataset']['nanopore']:
         rule mothur_classify:
             input:
                 expand(os.path.join(config["general"]["output_dir"],"clustering/vsearch_mod.fasta")) if config['clustering'] == "vsearch" else os.path.join(config["general"]["output_dir"],"filtering/filtered.fasta"),
-                "database/unite_v8.3.fasta"
+                "database/unite_v10.fasta"
             output:
                 os.path.join(config["general"]["output_dir"],"mothur/unite/mothur_out.summary"),
                 os.path.join(config["general"]["output_dir"],"mothur/unite/mothur_out.taxonomy")
@@ -150,7 +150,7 @@ elif config['dataset']['nanopore']:
             conda:
                 "../envs/mothur.yaml"
             log:
-                "logs/mothur_classify.log"
+                os.path.join(config["general"]["output_dir"],"logs/mothur_classify.log")
             shell:
                 """
                     mothur "#classify.seqs(fasta={input[0]}, cutoff=0, reference={params.template}, taxonomy={params.taxonomy}, method={params.method}, processors={params.threads}, output=simple, search={params.search})";
