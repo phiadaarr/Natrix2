@@ -26,7 +26,7 @@ COPY docker_dummyfiles/ /app/docker_dummyfiles
 COPY input_data/ /app/input_data
 COPY primer_table/ /app/primer_table
 
-RUN conda env create -f natrix.yaml
+RUN mamba env create -f natrix.yaml
 
 RUN env_loc=$(conda info --base)/etc/profile.d/conda.sh && source $env_loc && conda activate natrix && \
     mkdir docker_dummy_env1 && touch docker_dummy_env1.csv && cp docker_dummyfiles/units.tsv docker_dummy.tsv && \
