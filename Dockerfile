@@ -19,7 +19,7 @@ COPY rules/ /app/rules
 COPY envs/ /app/envs
 COPY natrix.yaml /app
 COPY docker_pipeline.sh /app/docker_pipeline.sh
-RUN chmod +x /app/docker_pipeline.sh
+RUN  chmod +x /app/docker_pipeline.sh
 
 COPY create_dataframe.py /app
 COPY docker_dummyfiles/ /app/docker_dummyfiles
