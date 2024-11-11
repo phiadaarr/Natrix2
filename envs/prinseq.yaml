@@ -1,5 +1,6 @@
 name: prinseq
 channels:
+  - conda-forge
   - bioconda
   - defaults
 dependencies:

@@ -1,7 +1,7 @@
 name: define_primer
 channels:
-  - bioconda
   - conda-forge
+  - bioconda
   - defaults
 dependencies:
   - pandas=2.0.3

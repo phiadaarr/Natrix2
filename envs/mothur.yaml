@@ -1,7 +1,7 @@
 name: mothur
 channels:
-  - bioconda
   - conda-forge
+  - bioconda
   - defaults
 dependencies:
   - mothur=1.48

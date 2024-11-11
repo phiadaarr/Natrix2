@@ -1,7 +1,7 @@
 name: unfiltered_table
 channels:
-  - bioconda
   - conda-forge
+  - bioconda
   - defaults
 dependencies:
   - dinopy=3.0.0
