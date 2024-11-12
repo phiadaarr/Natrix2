@@ -46,5 +46,6 @@ RUN env_loc=$(conda info --base)/etc/profile.d/conda.sh && source $env_loc && co
     snakemake --configfile docker_dummyfiles/docker_dummy_nanopore.yaml --cores 1 --use-conda --conda-create-envs-only --conda-frontend mamba && \
     rm -rf docker_dummy_nanopore && rm docker_dummy_nanopore.csv && rm docker_dummy.tsv
 
+COPY scripts/ /app/scripts
 
 CMD ["sh","-c", "./docker_pipeline.sh $PROJECT_NAME"]
