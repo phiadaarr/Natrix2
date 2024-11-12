@@ -18,6 +18,7 @@ COPY schema/ /app/schema
 COPY rules/ /app/rules
 COPY envs/ /app/envs
 COPY scripts/ /app/scripts
+COPY tools/ /app/tools
 
 COPY natrix.yaml /app
 COPY docker_pipeline.sh /app/docker_pipeline.sh
