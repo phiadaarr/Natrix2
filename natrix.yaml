@@ -5,4 +5,7 @@ channels:
   - defaults
 dependencies:
   - snakemake=5.32.2
-  - dinopy=2.0.1
+  - dinopy=3.0.0
+  - pandas=2.0.3
+  - seqkit=2.8.2
+  - pigz=2.8

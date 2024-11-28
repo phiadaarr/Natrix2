@@ -1,7 +1,7 @@
 name: merge_results
 channels:
-  - bioconda
   - conda-forge
+  - bioconda
   - defaults
 dependencies:
   - pandas=1.2.3

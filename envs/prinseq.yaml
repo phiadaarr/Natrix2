@@ -1,7 +1,8 @@
 name: prinseq
 channels:
+  - conda-forge
   - bioconda
   - defaults
 dependencies:
-  - perl-threaded=5.26.0
+  - perl-threaded
   - prinseq=0.20.4
